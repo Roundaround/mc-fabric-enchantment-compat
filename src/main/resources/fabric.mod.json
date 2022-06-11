@@ -13,7 +13,7 @@
   },
   "license": "MIT",
   "icon": "assets/enchantmentcompat/icon.png",
-  "environment": "client",
+  "environment": "*",
   "entrypoints": {
     "main": [
       "me.roundaround.enchantmentcompat.EnchantmentCompatMod"
@@ -27,7 +27,7 @@
   ],
   "depends": {
     "fabricloader": ">=0.13.3",
-    "minecraft": "1.18.x",
+    "minecraft": "1.19.x",
     "java": ">=17",
     "roundalib": ">=0.1.8"
   }
