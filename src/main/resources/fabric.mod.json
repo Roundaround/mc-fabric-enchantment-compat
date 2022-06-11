@@ -1,0 +1,34 @@
+{
+  "schemaVersion": 1,
+  "id": "enchantmentcompat",
+  "version": "${version}",
+  "name": "Enchantment Compatibility",
+  "description": "Make many mutually-exclusive enchantments compatible.",
+  "authors": [
+    "Roundaround"
+  ],
+  "contact": {
+    "homepage": "",
+    "sources": ""
+  },
+  "license": "MIT",
+  "icon": "assets/enchantmentcompat/icon.png",
+  "environment": "client",
+  "entrypoints": {
+    "main": [
+      "me.roundaround.enchantmentcompat.EnchantmentCompatMod"
+    ],
+    "modmenu": [
+      "me.roundaround.enchantmentcompat.compat.modmenu.ModMenuImpl"
+    ]
+  },
+  "mixins": [
+    "enchantmentcompat.mixins.json"
+  ],
+  "depends": {
+    "fabricloader": ">=0.13.3",
+    "minecraft": "1.18.x",
+    "java": ">=17",
+    "roundalib": ">=0.1.8"
+  }
+}
