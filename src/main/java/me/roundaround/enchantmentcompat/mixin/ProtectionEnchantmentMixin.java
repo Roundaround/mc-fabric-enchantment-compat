@@ -9,11 +9,10 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 import me.roundaround.enchantmentcompat.EnchantmentCompatMod;
 import net.minecraft.enchantment.Enchantment;
 import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.enchantment.PowerEnchantment;
 import net.minecraft.enchantment.ProtectionEnchantment;
 import net.minecraft.entity.EquipmentSlot;
 
-@Mixin(PowerEnchantment.class)
+@Mixin(ProtectionEnchantment.class)
 public abstract class ProtectionEnchantmentMixin extends Enchantment {
   protected ProtectionEnchantmentMixin(Rarity weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
     super(weight, type, slotTypes);

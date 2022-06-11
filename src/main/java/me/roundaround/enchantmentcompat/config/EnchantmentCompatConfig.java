@@ -23,25 +23,25 @@ public class EnchantmentCompatConfig extends ModConfig {
     INFINITY_MENDING = registerConfigOption(
         BooleanConfigOption
             .builder("infinityMending", "enchantmentcompat.infinity_mending.label")
-            .setComment("Simple toggle for the mod! Set to false to disable.")
+            .setComment("Whether to allow infinity and mending to combine.")
             .build());
 
     PROTECTION = registerConfigOption(
         BooleanConfigOption
             .builder("protection", "enchantmentcompat.protection.label")
-            .setComment("Simple toggle for the mod! Set to false to disable.")
+            .setComment("Whether to allow the different protections to combine.")
             .build());
 
     DAMAGE = registerConfigOption(
         BooleanConfigOption
             .builder("damage", "enchantmentcompat.damage.label")
-            .setComment("Simple toggle for the mod! Set to false to disable.")
+            .setComment("Whether to allow the different damages to combine.")
             .build());
 
     MULTISHOT_PIERCING = registerConfigOption(
         BooleanConfigOption
             .builder("multishotPiercing", "enchantmentcompat.multishot_piercing.label")
-            .setComment("Simple toggle for the mod! Set to false to disable.")
+            .setComment("Whether to allow multishot and piercing to combine.")
             .build());
   }
 }
