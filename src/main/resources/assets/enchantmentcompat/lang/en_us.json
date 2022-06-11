@@ -1,4 +1,8 @@
 {
   "enchantmentcompat.config.title": "Enchantment Compatibility Config",
-  "enchantmentcompat.mod_enabled.label": "Mod enabled"
+  "enchantmentcompat.mod_enabled.label": "Mod enabled",
+  "enchantmentcompat.infinity_mending.label": "Allow infinity + mending",
+  "enchantmentcompat.multishot_piercing.label": "Allow multishot + piercing",
+  "enchantmentcompat.protection.label": "Allow multiple protections",
+  "enchantmentcompat.damage.label": "Allow multiple damage increases"
 }
