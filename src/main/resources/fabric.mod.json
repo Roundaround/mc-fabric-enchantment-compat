@@ -3,13 +3,14 @@
   "id": "enchantmentcompat",
   "version": "${version}",
   "name": "Enchantment Compatibility",
-  "description": "Make many mutually-exclusive enchantments compatible.",
+  "description": "Make many mutually-exclusive enchantments compatible.\n${library}",
   "authors": [
     "Roundaround"
   ],
   "contact": {
-    "homepage": "",
-    "sources": ""
+    "homepage": "https://modrinth.com/mod/enchantment-compat",
+    "sources": "https://github.com/Roundaround/mc-fabric-enchantment-compat",
+    "issues": "https://github.com/Roundaround/mc-fabric-enchantment-compat/issues"
   },
   "license": "MIT",
   "icon": "assets/enchantmentcompat/icon.png",
@@ -26,9 +27,8 @@
     "enchantmentcompat.mixins.json"
   ],
   "depends": {
-    "fabricloader": ">=0.13.3",
+    "fabricloader": "*",
     "minecraft": "1.19.x",
-    "java": ">=17",
-    "roundalib": "~0.2.0"
+    "java": ">=17"
   }
 }

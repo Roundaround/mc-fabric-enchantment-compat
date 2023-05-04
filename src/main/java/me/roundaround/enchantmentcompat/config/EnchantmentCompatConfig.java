@@ -14,34 +14,34 @@ public class EnchantmentCompatConfig extends ModConfig {
   public EnchantmentCompatConfig() {
     super(EnchantmentCompatMod.MOD_ID);
 
-    MOD_ENABLED = registerConfigOption(
-        BooleanConfigOption
-            .builder("modEnabled", "enchantmentcompat.mod_enabled.label")
-            .setComment("Simple toggle for the mod! Set to false to disable.")
-            .build());
+    MOD_ENABLED = registerConfigOption(BooleanConfigOption.builder(this,
+            "modEnabled",
+            "enchantmentcompat.mod_enabled.label")
+        .setComment("Simple toggle for the mod! Set to false to disable.")
+        .build());
 
-    INFINITY_MENDING = registerConfigOption(
-        BooleanConfigOption
-            .yesNoBuilder("infinityMending", "enchantmentcompat.infinity_mending.label")
-            .setComment("Whether to allow infinity and mending to combine.")
-            .build());
+    INFINITY_MENDING = registerConfigOption(BooleanConfigOption.yesNoBuilder(this,
+            "infinityMending",
+            "enchantmentcompat.infinity_mending.label")
+        .setComment("Whether to allow infinity and mending to combine.")
+        .build());
 
-    MULTISHOT_PIERCING = registerConfigOption(
-        BooleanConfigOption
-            .yesNoBuilder("multishotPiercing", "enchantmentcompat.multishot_piercing.label")
-            .setComment("Whether to allow multishot and piercing to combine.")
-            .build());
+    MULTISHOT_PIERCING = registerConfigOption(BooleanConfigOption.yesNoBuilder(this,
+            "multishotPiercing",
+            "enchantmentcompat.multishot_piercing.label")
+        .setComment("Whether to allow multishot and piercing to combine.")
+        .build());
 
-    PROTECTION = registerConfigOption(
-        BooleanConfigOption
-            .yesNoBuilder("protection", "enchantmentcompat.protection.label")
-            .setComment("Whether to allow the different protections to combine.")
-            .build());
+    PROTECTION = registerConfigOption(BooleanConfigOption.yesNoBuilder(this,
+            "protection",
+            "enchantmentcompat.protection.label")
+        .setComment("Whether to allow the different protections to combine.")
+        .build());
 
-    DAMAGE = registerConfigOption(
-        BooleanConfigOption
-            .yesNoBuilder("damage", "enchantmentcompat.damage.label")
-            .setComment("Whether to allow the different damages to combine.")
-            .build());
+    DAMAGE = registerConfigOption(BooleanConfigOption.yesNoBuilder(this,
+            "damage",
+            "enchantmentcompat.damage.label")
+        .setComment("Whether to allow the different damages to combine.")
+        .build());
   }
 }
