@@ -1,38 +1,51 @@
 package me.roundaround.enchantmentcompat.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import me.roundaround.enchantmentcompat.config.EnchantmentCompatConfig;
+import net.minecraft.enchantment.DamageEnchantment;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.entity.EntityType;
+import net.minecraft.registry.tag.TagKey;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
-import me.roundaround.enchantmentcompat.EnchantmentCompatMod;
-import net.minecraft.enchantment.DamageEnchantment;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.entity.EquipmentSlot;
+import java.util.Objects;
+import java.util.Optional;
 
 @Mixin(DamageEnchantment.class)
 public abstract class DamageEnchantmentMixin extends Enchantment {
-  protected DamageEnchantmentMixin(Rarity weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
-    super(weight, type, slotTypes);
+  @Shadow
+  @Final
+  private Optional<TagKey<EntityType<?>>> applicableEntities;
+
+  protected DamageEnchantmentMixin(Properties properties) {
+    super(properties);
   }
 
-  @Shadow
-  public int typeIndex;
-
-  @Inject(method = "canAccept", at = @At(value = "HEAD"), cancellable = true)
-  private void canAccept(Enchantment other, CallbackInfoReturnable<Boolean> info) {
-    if (!EnchantmentCompatMod.CONFIG.MOD_ENABLED.getValue()
-        || !EnchantmentCompatMod.CONFIG.DAMAGE.getValue()) {
-      return;
+  @ModifyReturnValue(method = "canAccept", at = @At("RETURN"))
+  private boolean canAccept(boolean original, @Local(argsOnly = true) Enchantment other) {
+    EnchantmentCompatConfig config = EnchantmentCompatConfig.getInstance();
+    if (!config.modEnabled.getPendingValue() || !config.damage.getPendingValue()) {
+      return original;
     }
 
     // TODO: Add option to scale down damage when there are multiple
 
-    if (other instanceof DamageEnchantment) {
-      // Only adjust for damage
-      info.setReturnValue(((DamageEnchantment) other).typeIndex != typeIndex);
+    // Only adjust for damage enchantments
+    if (!(other instanceof DamageEnchantment)) {
+      return original;
     }
+
+    Optional<TagKey<EntityType<?>>> otherApplicableEntities =
+        ((DamageEnchantmentAccessor) other).getApplicableEntities();
+
+    if (this.applicableEntities.isEmpty() || otherApplicableEntities.isEmpty()) {
+      return true;
+    }
+
+    return !Objects.equals(this.applicableEntities.get(), otherApplicableEntities.get());
   }
 }

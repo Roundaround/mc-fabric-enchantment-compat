@@ -1,46 +1,50 @@
 package me.roundaround.enchantmentcompat.config;
 
 import me.roundaround.enchantmentcompat.EnchantmentCompatMod;
-import me.roundaround.roundalib.config.ModConfig;
+import me.roundaround.roundalib.config.ConfigPath;
+import me.roundaround.roundalib.config.manage.ModConfigImpl;
+import me.roundaround.roundalib.config.manage.store.WorldScopedFileStore;
 import me.roundaround.roundalib.config.option.BooleanConfigOption;
 
-public class EnchantmentCompatConfig extends ModConfig {
-  public final BooleanConfigOption MOD_ENABLED;
-  public final BooleanConfigOption INFINITY_MENDING;
-  public final BooleanConfigOption MULTISHOT_PIERCING;
-  public final BooleanConfigOption PROTECTION;
-  public final BooleanConfigOption DAMAGE;
+public class EnchantmentCompatConfig extends ModConfigImpl implements WorldScopedFileStore {
+  private static EnchantmentCompatConfig instance;
 
-  public EnchantmentCompatConfig() {
+  public BooleanConfigOption modEnabled;
+  public BooleanConfigOption infinityMending;
+  public BooleanConfigOption multishotPiercing;
+  public BooleanConfigOption protection;
+  public BooleanConfigOption damage;
+
+  private EnchantmentCompatConfig() {
     super(EnchantmentCompatMod.MOD_ID);
+  }
 
-    MOD_ENABLED = registerConfigOption(BooleanConfigOption.builder(this,
-            "modEnabled",
-            "enchantmentcompat.mod_enabled.label")
+  public static EnchantmentCompatConfig getInstance() {
+    if (instance == null) {
+      instance = new EnchantmentCompatConfig();
+    }
+    return instance;
+  }
+
+  @Override
+  protected void registerOptions() {
+    modEnabled = this.register(BooleanConfigOption.builder(ConfigPath.of("modEnabled"))
         .setComment("Simple toggle for the mod! Set to false to disable.")
         .build());
 
-    INFINITY_MENDING = registerConfigOption(BooleanConfigOption.yesNoBuilder(this,
-            "infinityMending",
-            "enchantmentcompat.infinity_mending.label")
+    infinityMending = this.register(BooleanConfigOption.yesNoBuilder(ConfigPath.of("infinityMending"))
         .setComment("Whether to allow infinity and mending to combine.")
         .build());
 
-    MULTISHOT_PIERCING = registerConfigOption(BooleanConfigOption.yesNoBuilder(this,
-            "multishotPiercing",
-            "enchantmentcompat.multishot_piercing.label")
+    multishotPiercing = this.register(BooleanConfigOption.yesNoBuilder(ConfigPath.of("multishotPiercing"))
         .setComment("Whether to allow multishot and piercing to combine.")
         .build());
 
-    PROTECTION = registerConfigOption(BooleanConfigOption.yesNoBuilder(this,
-            "protection",
-            "enchantmentcompat.protection.label")
+    protection = this.register(BooleanConfigOption.yesNoBuilder(ConfigPath.of("protection"))
         .setComment("Whether to allow the different protections to combine.")
         .build());
 
-    DAMAGE = registerConfigOption(BooleanConfigOption.yesNoBuilder(this,
-            "damage",
-            "enchantmentcompat.damage.label")
+    damage = this.register(BooleanConfigOption.yesNoBuilder(ConfigPath.of("damage"))
         .setComment("Whether to allow the different damages to combine.")
         .build());
   }

@@ -1,38 +1,33 @@
 package me.roundaround.enchantmentcompat.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import me.roundaround.enchantmentcompat.config.EnchantmentCompatConfig;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.ProtectionEnchantment;
+import org.spongepowered.asm.mixin.Final;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Shadow;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import me.roundaround.enchantmentcompat.EnchantmentCompatMod;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.enchantment.ProtectionEnchantment;
-import net.minecraft.entity.EquipmentSlot;
 
 @Mixin(ProtectionEnchantment.class)
-public abstract class ProtectionEnchantmentMixin extends Enchantment {
-  protected ProtectionEnchantmentMixin(Rarity weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
-    super(weight, type, slotTypes);
-  }
-
+public abstract class ProtectionEnchantmentMixin {
+  @Final
   @Shadow
   public ProtectionEnchantment.Type protectionType;
 
-  @Inject(method = "canAccept", at = @At(value = "HEAD"), cancellable = true)
-  private void canAccept(Enchantment other, CallbackInfoReturnable<Boolean> info) {
-    if (!EnchantmentCompatMod.CONFIG.MOD_ENABLED.getValue()
-        || !EnchantmentCompatMod.CONFIG.PROTECTION.getValue()) {
-      return;
+  @ModifyReturnValue(method = "canAccept", at = @At("RETURN"))
+  private boolean canAccept(boolean original, @Local(argsOnly = true) Enchantment other) {
+    EnchantmentCompatConfig config = EnchantmentCompatConfig.getInstance();
+    if (!config.modEnabled.getPendingValue() || !config.protection.getPendingValue()) {
+      return original;
     }
 
     // TODO: Add option to scale down protection when there are multiple
 
-    if (other instanceof ProtectionEnchantment) {
-      // Only adjust for protection
-      info.setReturnValue(((ProtectionEnchantment) other).protectionType != protectionType);
-    }
+    // Only adjust for protection enchantments
+    return other instanceof ProtectionEnchantment otherProtect ?
+        this.protectionType != otherProtect.protectionType :
+        original;
   }
 }

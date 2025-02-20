@@ -1,33 +1,24 @@
 package me.roundaround.enchantmentcompat.mixin;
 
+import com.llamalad7.mixinextras.injector.ModifyReturnValue;
+import com.llamalad7.mixinextras.sugar.Local;
+import me.roundaround.enchantmentcompat.config.EnchantmentCompatConfig;
+import net.minecraft.enchantment.Enchantment;
+import net.minecraft.enchantment.Enchantments;
+import net.minecraft.enchantment.MultishotEnchantment;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.injection.At;
-import org.spongepowered.asm.mixin.injection.Inject;
-import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-
-import me.roundaround.enchantmentcompat.EnchantmentCompatMod;
-import net.minecraft.enchantment.Enchantment;
-import net.minecraft.enchantment.EnchantmentTarget;
-import net.minecraft.enchantment.MultishotEnchantment;
-import net.minecraft.enchantment.PiercingEnchantment;
-import net.minecraft.entity.EquipmentSlot;
 
 @Mixin(MultishotEnchantment.class)
-public abstract class MultishotEnchantmentMixin extends Enchantment {
-  protected MultishotEnchantmentMixin(Rarity weight, EnchantmentTarget type, EquipmentSlot[] slotTypes) {
-    super(weight, type, slotTypes);
-  }
-
-  @Inject(method = "canAccept", at = @At(value = "HEAD"), cancellable = true)
-  private void canAccept(Enchantment other, CallbackInfoReturnable<Boolean> info) {
-    if (!EnchantmentCompatMod.CONFIG.MOD_ENABLED.getValue()
-        || !EnchantmentCompatMod.CONFIG.MULTISHOT_PIERCING.getValue()) {
-      return;
+public abstract class MultishotEnchantmentMixin {
+  @ModifyReturnValue(method = "canAccept", at = @At("RETURN"))
+  private boolean canAccept(boolean original, @Local(argsOnly = true) Enchantment other) {
+    EnchantmentCompatConfig config = EnchantmentCompatConfig.getInstance();
+    if (!config.modEnabled.getPendingValue() || !config.multishotPiercing.getPendingValue()) {
+      return original;
     }
 
-    if (other instanceof PiercingEnchantment) {
-      // Only adjust for piercing
-      info.setReturnValue(super.canAccept(other));
-    }
+    // Only adjust for piercing
+    return other == Enchantments.PIERCING || original;
   }
 }

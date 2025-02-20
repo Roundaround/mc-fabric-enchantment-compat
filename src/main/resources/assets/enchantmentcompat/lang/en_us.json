@@ -1,5 +1,7 @@
 {
   "enchantmentcompat.config.title": "Enchantment Compatibility Config",
+  "enchantmentcompat.config.notInWorld.1": "Enchantment Compatibility is configurable on a per-world/save basis.",
+  "enchantmentcompat.config.notInWorld.2": "Please join a world to use the configuration screen!",
   "enchantmentcompat.mod_enabled.label": "Mod enabled",
   "enchantmentcompat.infinity_mending.label": "Allow infinity + mending",
   "enchantmentcompat.multishot_piercing.label": "Allow multishot + piercing",
