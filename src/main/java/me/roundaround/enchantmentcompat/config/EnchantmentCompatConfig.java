@@ -29,22 +29,27 @@ public class EnchantmentCompatConfig extends ModConfigImpl implements WorldScope
   @Override
   protected void registerOptions() {
     modEnabled = this.register(BooleanConfigOption.builder(ConfigPath.of("modEnabled"))
+        .setDefaultValue(true)
         .setComment("Simple toggle for the mod! Set to false to disable.")
         .build());
 
     infinityMending = this.register(BooleanConfigOption.yesNoBuilder(ConfigPath.of("infinityMending"))
+        .setDefaultValue(true)
         .setComment("Whether to allow infinity and mending to combine.")
         .build());
 
     multishotPiercing = this.register(BooleanConfigOption.yesNoBuilder(ConfigPath.of("multishotPiercing"))
+        .setDefaultValue(true)
         .setComment("Whether to allow multishot and piercing to combine.")
         .build());
 
     protection = this.register(BooleanConfigOption.yesNoBuilder(ConfigPath.of("protection"))
+        .setDefaultValue(true)
         .setComment("Whether to allow the different protections to combine.")
         .build());
 
     damage = this.register(BooleanConfigOption.yesNoBuilder(ConfigPath.of("damage"))
+        .setDefaultValue(true)
         .setComment("Whether to allow the different damages to combine.")
         .build());
   }
