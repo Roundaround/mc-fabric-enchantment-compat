@@ -3,12 +3,7 @@
   "minVersion": "0.8",
   "package": "me.roundaround.enchantmentcompat.mixin",
   "mixins": [
-    "DamageEnchantmentAccessor",
-    "DamageEnchantmentMixin",
-    "InfinityEnchantmentMixin",
-    "MultishotEnchantmentMixin",
-    "PiercingEnchantmentMixin",
-    "ProtectionEnchantmentMixin"
+    "EnchantmentMixin"
   ],
   "injectors": {
     "defaultRequire": 1
