@@ -35,11 +35,11 @@ public class NotInWorldConfigScreen extends Screen {
         .build());
 
     this.layout.forEachChild(this::addDrawableChild);
-    this.initTabNavigation();
+    this.refreshWidgetPositions();
   }
 
   @Override
-  protected void initTabNavigation() {
+  protected void refreshWidgetPositions() {
     this.layout.refreshPositions();
   }
 
