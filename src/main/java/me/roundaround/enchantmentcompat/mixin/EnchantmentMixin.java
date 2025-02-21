@@ -51,13 +51,13 @@ public abstract class EnchantmentMixin {
       return Optional.empty();
     }
 
-    if (config.infinityMending.getPendingValue() && isIn(enchantment, EnchantmentTags.BOW_EXCLUSIVE_SET)) {
+    if (config.bows.getPendingValue() && isIn(enchantment, EnchantmentTags.BOW_EXCLUSIVE_SET)) {
       return Optional.of(false);
     }
-    if (config.multishotPiercing.getPendingValue() && isIn(enchantment, EnchantmentTags.CROSSBOW_EXCLUSIVE_SET)) {
+    if (config.crossbows.getPendingValue() && isIn(enchantment, EnchantmentTags.CROSSBOW_EXCLUSIVE_SET)) {
       return Optional.of(false);
     }
-    if (config.protection.getPendingValue() && isIn(enchantment, EnchantmentTags.ARMOR_EXCLUSIVE_SET)) {
+    if (config.armor.getPendingValue() && isIn(enchantment, EnchantmentTags.ARMOR_EXCLUSIVE_SET)) {
       return Optional.of(false);
     }
     if (config.damage.getPendingValue() && isIn(enchantment, EnchantmentTags.DAMAGE_EXCLUSIVE_SET)) {

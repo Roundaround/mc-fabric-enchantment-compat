@@ -3,8 +3,8 @@
   "enchantmentcompat.config.notInWorld.1": "Enchantment Compatibility is configurable on a per-world/save basis.",
   "enchantmentcompat.config.notInWorld.2": "Please join a world to use the configuration screen!",
   "enchantmentcompat.modEnabled.label": "Mod enabled",
-  "enchantmentcompat.infinityMending.label": "Allow infinity + mending",
-  "enchantmentcompat.multishotPiercing.label": "Allow multishot + piercing",
-  "enchantmentcompat.protection.label": "Allow multiple protections",
-  "enchantmentcompat.damage.label": "Allow multiple damage increases"
+  "enchantmentcompat.bows.label": "Allow bow enchantments (i.e. infinity, mending) to combine",
+  "enchantmentcompat.crossbows.label": "Allow crossbow enchantments (i.e. multishot, piercing) to combine",
+  "enchantmentcompat.armor.label": "Allow armor enchantments (i.e. X protection) to combine",
+  "enchantmentcompat.damage.label": "Allow damage enchantments (i.e. sharpness, smite) to combine"
 }
