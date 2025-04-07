@@ -1,11 +1,11 @@
 package me.roundaround.enchantmentcompat.config;
 
-import me.roundaround.enchantmentcompat.EnchantmentCompatMod;
-import me.roundaround.roundalib.config.ConfigPath;
-import me.roundaround.roundalib.config.manage.ModConfigImpl;
-import me.roundaround.roundalib.config.manage.store.WorldScopedFileStore;
-import me.roundaround.roundalib.config.option.BooleanConfigOption;
-import me.roundaround.roundalib.nightconfig.core.Config;
+import me.roundaround.enchantmentcompat.generated.Constants;
+import me.roundaround.enchantmentcompat.roundalib.config.ConfigPath;
+import me.roundaround.enchantmentcompat.roundalib.config.manage.ModConfigImpl;
+import me.roundaround.enchantmentcompat.roundalib.config.manage.store.WorldScopedFileStore;
+import me.roundaround.enchantmentcompat.roundalib.config.option.BooleanConfigOption;
+import me.roundaround.enchantmentcompat.roundalib.nightconfig.core.Config;
 
 public class EnchantmentCompatConfig extends ModConfigImpl implements WorldScopedFileStore {
   private static EnchantmentCompatConfig instance;
@@ -17,7 +17,7 @@ public class EnchantmentCompatConfig extends ModConfigImpl implements WorldScope
   public BooleanConfigOption damage;
 
   private EnchantmentCompatConfig() {
-    super(EnchantmentCompatMod.MOD_ID, 2);
+    super(Constants.MOD_ID, 2);
   }
 
   public static EnchantmentCompatConfig getInstance() {
